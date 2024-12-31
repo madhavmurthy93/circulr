@@ -1,3 +1,7 @@
+export const metadata = {
+  title: "Sign in",
+};
+
 export default function Page() {
   return (
     <div className="flex flex-col gap-10 items-center justify-center h-full">

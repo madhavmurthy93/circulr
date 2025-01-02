@@ -29,14 +29,14 @@ function ProductCard({ product }: Props) {
         <img
           src={`https://picsum.photos/400/300?random=${id}`}
           alt=""
-          className="w-full h-60 object-cover rounded-lg"
+          className="object-cover rounded-lg"
         />
-        <p className="mt-2 text-gray-500">{productName}</p>
+        <p className="mt-2 text-sm md:text-base text-gray-500 truncate">{productName}</p>
       </Link>
-      <div className="flex items-center mt-2">
+      <div className="flex items-center mt-2 text-sm md:text-base">
         <StarRating rating={value} numRatings={numRatings} />
       </div>
-      <p className="mt-2 text-gray-400">{lenderName}</p>
+      <p className="mt-2 text-sm md:text-base text-gray-400">{lenderName}</p>
     </div>
   );
 }

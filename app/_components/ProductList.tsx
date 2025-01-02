@@ -3,7 +3,7 @@ import ProductCard from "./ProductCard";
 
 function ProductList() {
   return (
-    <div className="grid grid-cols-4 gap-x-4 gap-y-8">
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-8">
       {Array.from({ length: 40 }, (_, index) => (
         <ProductCard
           key={index}

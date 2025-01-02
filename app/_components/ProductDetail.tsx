@@ -20,8 +20,8 @@ interface Props {
 function ProductDetail({ product }: Props) {
   const { id } = product;
   return (
-    <div className="flex flex-row gap-8 justify-between">
-      <div className="basis-2/3">
+    <div className="flex flex-col md:flex-row gap-8">
+      <div className="md:basis-2/3">
         <ImageCarousel
           images={[
             `https://picsum.photos/400/300?random=${id}`,
@@ -30,7 +30,7 @@ function ProductDetail({ product }: Props) {
           ]}
         />
       </div>
-      <div className="basis-1/3">
+      <div className="md:basis-1/3">
         <ProductInfo product={product} />
       </div>
     </div>

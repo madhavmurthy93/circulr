@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Header from "./_components/Header";
+import Header from "./_components/header/Header";
+import Main from "./_components/Main";
+import ReduxProvider from "./_components/ReduxProvider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -32,10 +34,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
-        <Header />
-        <main className="flex-1 grid">
-          <div className="max-w-7xl mx-auto w-full px-4 md:px-6 lg:px-8 py-12">{children}</div>
-        </main>
+        <ReduxProvider>
+          <Header />
+          <Main>{children}</Main>
+        </ReduxProvider>
       </body>
     </html>
   );

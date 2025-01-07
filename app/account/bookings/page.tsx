@@ -4,8 +4,8 @@ export const metadata = {
 
 export default function Page() {
   return (
-    <h2 className="font-semibold text-xl md:text-2xl">
-      Let&apos;s look at what you&apos;re borrowing
-    </h2>
+    <div>
+      <h2 className="font-semibold text-xl md:text-2xl">What you&apos;re borrowing</h2>
+    </div>
   );
 }

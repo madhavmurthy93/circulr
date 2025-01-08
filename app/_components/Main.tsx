@@ -10,7 +10,7 @@ function Main({
 }>) {
   const isSidebarOpen = useAppSelector((state: RootState) => state.sidebar.mainSidebar);
   return (
-    <main className="flex-1 grid font-sans">
+    <main className="flex flex-1 font-sans">
       <div
         className={`max-w-7xl mx-auto w-full px-4 md:px-6 lg:px-8 py-12 transition-opacity duration-300 ${
           isSidebarOpen ? "opacity-25" : "opacity-100"

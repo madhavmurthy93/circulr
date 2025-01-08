@@ -1,3 +1,4 @@
+import { capitalizeFirstLetters, categories } from "@/app/utils/categories";
 import Link from "next/link";
 import { useRef } from "react";
 import { HiChevronDown, HiOutlineSquares2X2 } from "react-icons/hi2";
@@ -6,15 +7,6 @@ import { useAppSelector } from "../../_redux/hooks";
 import { toggleDropdown } from "../../_redux/slices/dropdownSlice";
 import { AppDispatch, RootState } from "../../_redux/store";
 import Dropdown from "./Dropdown";
-
-const categories = ["electronics", "books", "tools", "clothing", "furniture"];
-
-const capitalizeFirstLetters = (str: string) => {
-  return str
-    .split(" ")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-};
 
 function CategoryDropdown({ dispatch }: { dispatch: AppDispatch }) {
   const isOpen = useAppSelector(

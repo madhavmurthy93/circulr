@@ -1,17 +1,10 @@
+import { capitalizeFirstLetters, categories } from "@/app/utils/categories";
 import Link from "next/link";
 import { forwardRef } from "react";
 import { HiOutlineArrowLeft } from "react-icons/hi2";
 import { closeAllSidebars } from "../../_redux/slices/sidebarSlice";
 import { AppDispatch } from "../../_redux/store";
 import Sidebar from "./Sidebar";
-
-const categories = ["electronics", "books", "tools", "clothing", "furniture"];
-const capitalizeFirstLetters = (str: string) => {
-  return str
-    .split(" ")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-};
 
 const CategorySidebar = forwardRef<HTMLDivElement, { dispatch: AppDispatch }>(
   ({ dispatch }, ref) => {

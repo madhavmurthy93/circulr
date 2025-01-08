@@ -32,10 +32,12 @@ const ThumbnailProductCard = forwardRef<HTMLDivElement, ThumbnailProductCardProp
             alt=""
             className="object-cover rounded-lg"
           />
-          <p className="pt-2 text-sm md:text-base text-primary-900 truncate">{productName}</p>
+          <p className="pt-2 text-sm md:text-base text-primary-900 font-semibold truncate">
+            {productName}
+          </p>
         </Link>
-        <p className="pt-1 text-sm md:text-base text-primary-800">{lenderName}</p>
-        <p className="pt-1 text-xs md:text-sm text-primary-800 flex flex-row gap-1">
+        <p className="pt-1 text-sm md:text-base text-primary-800 truncate">{lenderName}</p>
+        <p className="pt-1 text-sm md:text-base text-primary-800 flex flex-row items-center gap-1 truncate">
           <HiOutlineMapPin />
           <span>{lenderCity}</span>
         </p>

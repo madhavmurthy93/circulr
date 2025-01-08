@@ -4,14 +4,8 @@ import { faker } from "@faker-js/faker";
 import Link from "next/link";
 import { useRef } from "react";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
+import { capitalizeFirstLetters } from "../utils/categories";
 import ThumbnailProductCard from "./ThumbnailProductCard";
-
-const capitalizeFirstLetters = (str: string) => {
-  return str
-    .split(" ")
-    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(" ");
-};
 
 interface ThumbnailProductListProps {
   category: string;
@@ -60,7 +54,7 @@ function ThumbnailProductList({ category }: ThumbnailProductListProps) {
       <div className="relative w-full">
         <button
           onClick={scrollLeft}
-          className={`absolute top-1/2 left-2 transform -translate-y-1/2 w-8 h-8 flex items-center justify-center border rounded-full shadow-md bg-white text-xl hover:opacity-50`}
+          className={`absolute top-1/2 left-2 transform -translate-y-1/2 w-8 h-8 flex items-center justify-center border rounded-full shadow-md bg-white text-xl text-primary-900 hover:opacity-50`}
         >
           <HiChevronLeft />
         </button>
@@ -85,7 +79,7 @@ function ThumbnailProductList({ category }: ThumbnailProductListProps) {
         </div>
         <button
           onClick={scrollRight}
-          className={`absolute top-1/2 right-2 transform -translate-y-1/2 w-8 h-8 flex items-center justify-center border rounded-full shadow-md bg-white text-xl hover:opacity-50`}
+          className={`absolute top-1/2 right-2 transform -translate-y-1/2 w-8 h-8 flex items-center justify-center border rounded-full shadow-md bg-white text-xl text-primary-900 hover:opacity-50`}
         >
           <HiChevronRight />
         </button>

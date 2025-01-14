@@ -30,7 +30,7 @@ const MainSidebar = forwardRef<HTMLDivElement, { dispatch: AppDispatch }>(({ dis
         </li>
         <li>
           <Link
-            href="/account"
+            href="/account/borrowing"
             className="py-4 px-2 flex flex-row gap-2 items-center hover:bg-primary-50"
             onClick={() => dispatch(closeAllSidebars())}
           >
@@ -42,7 +42,7 @@ const MainSidebar = forwardRef<HTMLDivElement, { dispatch: AppDispatch }>(({ dis
         </li>
         <li>
           <Link
-            href="/account"
+            href="/account/lending"
             className="py-4 px-2 flex flex-row gap-2 items-center hover:bg-primary-50"
             onClick={() => dispatch(closeAllSidebars())}
           >

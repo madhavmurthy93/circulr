@@ -53,7 +53,7 @@ function ProductDetail({ product }: Props) {
         <HiOutlineMapPin />
         <span>{lenderCity}</span>
       </p>
-      <button className="text-base font-semibold bg-primary-700 text-white rounded-full hover:bg-primary-600 py-3 px-3 md:col-start-2">
+      <button className="text-base font-semibold bg-primary-700 text-white rounded-md hover:bg-primary-600 py-3 px-3 md:col-start-2">
         Borrow
       </button>
       <hr className="md:col-start-2" />

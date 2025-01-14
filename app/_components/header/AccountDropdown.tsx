@@ -31,7 +31,7 @@ function AccountDropdown({ dispatch }: { dispatch: AppDispatch }) {
         <ul>
           <li>
             <Link
-              href="/account"
+              href="/account/borrowing"
               className="border-b py-4 px-4 flex flex-row gap-2 items-center text-primary-900 hover:bg-primary-50"
               onClick={() => dispatch(toggleDropdown("accountDropdown"))}
             >
@@ -43,7 +43,7 @@ function AccountDropdown({ dispatch }: { dispatch: AppDispatch }) {
           </li>
           <li>
             <Link
-              href="/account"
+              href="/account/lending"
               className="border-b py-4 px-4 flex flex-row gap-2 items-center text-primary-900 hover:bg-primary-50"
               onClick={() => dispatch(toggleDropdown("accountDropdown"))}
             >

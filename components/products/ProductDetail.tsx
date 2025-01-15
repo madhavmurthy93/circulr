@@ -1,6 +1,6 @@
-import { HiOutlineMapPin } from 'react-icons/hi2';
-import ImageCarousel from './ui/ImageCarousel';
-import StarRating from './ui/StarRating';
+import ImageCarousel from "@/components/ui/ImageCarousel";
+import StarRating from "@/components/ui/StarRating";
+import { HiOutlineMapPin } from "react-icons/hi2";
 
 interface Props {
   product: {

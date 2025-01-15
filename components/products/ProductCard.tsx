@@ -1,6 +1,6 @@
-import Link from 'next/link';
-import { HiOutlineMapPin } from 'react-icons/hi2';
-import StarRating from './ui/StarRating';
+import StarRating from "@/components/ui/StarRating";
+import Link from "next/link";
+import { HiOutlineMapPin } from "react-icons/hi2";
 
 interface ProductCardProps {
   product: {

@@ -1,4 +1,4 @@
-import { HiMagnifyingGlass } from 'react-icons/hi2';
+import { HiMagnifyingGlass } from "react-icons/hi2";
 
 function SearchBar() {
   return (
@@ -6,9 +6,9 @@ function SearchBar() {
       <input
         type="text"
         placeholder="Search"
-        className="w-full rounded-full py-3 pl-4 pr-10 text-gray-900"
+        className="w-full rounded-md py-3 pl-4 pr-10 text-gray-900"
       />
-      <button className="absolute inset-y-0 right-0 m-1 flex items-center rounded-full px-3 py-2 hover:bg-primary-100">
+      <button className="absolute inset-y-0 right-0 m-1 flex items-center rounded-md px-3 py-2 hover:bg-primary-100">
         <span className="text-xl text-gray-800">
           <HiMagnifyingGlass />
         </span>

@@ -5,7 +5,7 @@ import { HiBars3 } from "react-icons/hi2";
 function SidebarToggle({ dispatch }: { dispatch: AppDispatch }) {
   return (
     <button
-      className="block rounded-full px-3 py-3 hover:bg-primary-600 md:hidden"
+      className="block rounded-md px-3 py-3 hover:bg-primary-600 md:hidden"
       onClick={() => dispatch(toggleSidebar("mainSidebar"))}
     >
       <span className="text-2xl">

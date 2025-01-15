@@ -24,7 +24,7 @@ function AccountDropdown({ dispatch }: { dispatch: AppDispatch }) {
   return (
     <div className="relative" ref={ref}>
       <button
-        className="hidden rounded-full px-3 py-3 hover:bg-primary-600 md:block"
+        className="hidden rounded-md px-3 py-3 hover:bg-primary-600 md:block"
         onClick={() => dispatch(toggleDropdown("accountDropdown"))}
       >
         <span className="text-2xl text-white">

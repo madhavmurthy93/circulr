@@ -21,7 +21,7 @@ function CategoryDropdown({ dispatch }: { dispatch: AppDispatch }) {
   return (
     <div className="relative" ref={ref}>
       <button
-        className="hidden items-center gap-1 rounded-full px-4 py-3 hover:bg-primary-600 md:flex"
+        className="hidden items-center gap-1 rounded-md px-4 py-3 hover:bg-primary-600 md:flex"
         onClick={() => dispatch(toggleDropdown("categoryDropdown"))}
       >
         <span className="text-2xl">

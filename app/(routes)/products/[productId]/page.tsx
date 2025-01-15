@@ -1,5 +1,5 @@
-import ProductDetail from "@/components/ProductDetail";
-import ThumbnailProductList from "@/components/ThumbnailProductList";
+import ProductDetail from "@/components/products/ProductDetail";
+import ThumbnailProductList from "@/components/products/ThumbnailProductList";
 import { faker } from "@faker-js/faker";
 
 interface Props {

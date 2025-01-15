@@ -1,4 +1,4 @@
-import ThumbnailProductList from "@/components/ThumbnailProductList";
+import ThumbnailProductList from "@/components/products/ThumbnailProductList";
 import { categories } from "@/utils/categories";
 
 export default function Home() {

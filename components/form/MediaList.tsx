@@ -9,7 +9,9 @@ interface MediaListProps {
 function MediaList({ label, name, images }: MediaListProps) {
   return (
     <div className="flex flex-col gap-2">
-      <label className="font-medium text-gray-900">{label}</label>
+      <label className="text-sm font-medium text-gray-900 md:text-base">
+        {label}
+      </label>
       <div className="flex flex-wrap gap-2">
         {images.map((image, index) => (
           <div

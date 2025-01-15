@@ -1,10 +1,9 @@
 "use client";
 
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { toggleSidebar } from "@/redux/slices/sidebarSlice";
-import { RootState } from "@/redux/store";
 import { SidebarState } from "@/types";
 import { forwardRef } from "react";
-import { useDispatch, useSelector } from "react-redux";
 
 interface SidebarProps {
   name: keyof SidebarState;
@@ -14,8 +13,8 @@ interface SidebarProps {
 
 const Sidebar = forwardRef<HTMLDivElement, SidebarProps>(
   ({ name, toggleIcon, children }, ref) => {
-    const dispatch = useDispatch();
-    const isOpen = useSelector((state: RootState) => state.sidebar[name]);
+    const dispatch = useAppDispatch();
+    const isOpen = useAppSelector((state) => state.sidebar[name]);
 
     const toggle = () => {
       dispatch(toggleSidebar(name));

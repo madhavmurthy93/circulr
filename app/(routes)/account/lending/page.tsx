@@ -1,9 +1,8 @@
+import AddProduct from "@/components/lending/AddProduct";
 import ProductRow from "@/components/lending/ProductRow";
-import Button from "@/components/ui/Button";
 import Filter from "@/components/ui/Filter";
 import Table from "@/components/ui/Table";
 import { faker } from "@faker-js/faker";
-import { HiOutlinePlus } from "react-icons/hi2";
 
 export const metadata = {
   title: "Lending",
@@ -39,11 +38,7 @@ export default function Page() {
           <ProductRow columns="1fr,2fr,1.5fr,1.5fr" product={data} />
         )}
       />
-      <Button type="sticky">
-        <span className="text-xl">
-          <HiOutlinePlus />
-        </span>
-      </Button>
+      <AddProduct />
     </div>
   );
 }

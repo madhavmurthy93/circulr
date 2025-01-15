@@ -31,10 +31,10 @@ export default async function Page({ params }: EditPageProps) {
           href="/account/lending"
           className="flex flex-row items-center gap-2 text-primary-700 underline hover:text-primary-600"
         >
-          <span className="text-2xl">
+          <span className="text-xl md:text-2xl">
             <HiOutlineArrowLeft />
           </span>
-          <span className="text-lg">{productName}</span>
+          <span className="text-base md:text-lg">{productName}</span>
         </Link>
         <div className="text-sm font-semibold">
           <span

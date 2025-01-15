@@ -8,7 +8,12 @@ export function useOutsideClick(
 ): void {
   useEffect(() => {
     function handleClick(e: MouseEvent): void {
-      if (refs.every((ref) => ref.current && !ref.current.contains(e.target as Node))) {
+      console.log(e);
+      if (
+        refs.every(
+          (ref) => ref.current && !ref.current.contains(e.target as Node)
+        )
+      ) {
         if (shouldPreventDefault()) {
           e.preventDefault();
         }

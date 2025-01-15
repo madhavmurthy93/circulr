@@ -13,7 +13,9 @@ function InputList({ label, name, items }: InputListProps) {
   const [values, setValues] = useState(items);
   return (
     <div className="flex flex-col gap-2">
-      <label className="font-medium text-gray-900">{label}</label>
+      <label className="text-sm font-medium text-gray-900 md:text-base">
+        {label}
+      </label>
       <div className="flex flex-col gap-2">
         {values.map((value, index) => (
           <input
@@ -21,7 +23,7 @@ function InputList({ label, name, items }: InputListProps) {
             type="text"
             id={`${name}-${index}`}
             name={`${name}-${index}`}
-            className="w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-primary-700 focus:outline-none focus:ring-primary-700"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-primary-700 focus:outline-none focus:ring-primary-700 md:text-base"
             value={value}
             onChange={(e) =>
               setValues((prev) =>

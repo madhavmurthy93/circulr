@@ -6,3 +6,7 @@ export interface SidebarState {
 export interface DropdownState {
   openDropdown: string | null;
 }
+
+export interface ModalState {
+  openModal: string | null;
+}

@@ -51,7 +51,7 @@ export default async function Page({ params }: EditPageProps) {
           <EditMenu />
         </div>
       </div>
-      <Input label="Name" name="name" defaultValue={productName} />
+      <Input label="Name" id="name" defaultValue={productName} />
       <TextArea
         label="Description"
         name="description"

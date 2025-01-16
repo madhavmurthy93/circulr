@@ -1,4 +1,4 @@
-import AddProduct from "@/components/lending/AddProduct";
+import CreateItem from "@/components/lending/CreateItem";
 import ProductRow from "@/components/lending/ProductRow";
 import Filter from "@/components/ui/Filter";
 import Table from "@/components/ui/Table";
@@ -38,7 +38,7 @@ export default function Page() {
           <ProductRow columns="1fr,2fr,1.5fr,1.5fr" product={data} />
         )}
       />
-      <AddProduct />
+      <CreateItem />
     </div>
   );
 }

@@ -7,6 +7,7 @@ export default {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  safelist: ["grid-cols-[1fr,2fr,1.5fr,1.5fr]"],
   theme: {
     extend: {
       colors: {
@@ -26,6 +27,22 @@ export default {
       fontFamily: {
         sans: ["var(--font-geist-sans)"],
         mono: ["var(--font-geist-mono)"],
+      },
+      width: {
+        112: "28rem",
+        128: "32rem",
+        144: "36rem",
+        160: "40rem",
+        192: "48rem",
+        224: "56rem",
+      },
+      height: {
+        112: "28rem",
+        128: "32rem",
+        144: "36rem",
+        160: "40rem",
+        192: "48rem",
+        224: "56rem",
       },
     },
   },

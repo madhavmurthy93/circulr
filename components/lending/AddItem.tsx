@@ -3,9 +3,9 @@
 import { HiOutlinePlus } from "react-icons/hi2";
 import Button from "../ui/Button";
 import Modal from "../ui/Modal";
-import CreateItemForm from "./CreateItemForm";
+import AddItemForm from "./AddItemForm";
 
-function CreateItem() {
+function AddItem() {
   return (
     <div>
       <Modal>
@@ -17,11 +17,11 @@ function CreateItem() {
           </Button>
         </Modal.Open>
         <Modal.Window name="addItem" label="Add Item">
-          <CreateItemForm />
+          <AddItemForm />
         </Modal.Window>
       </Modal>
     </div>
   );
 }
 
-export default CreateItem;
+export default AddItem;

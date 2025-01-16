@@ -18,7 +18,7 @@ type FormValues = {
   status: string;
 };
 
-function CreateItemForm() {
+function AddItemForm() {
   const {
     register,
     handleSubmit,
@@ -145,9 +145,9 @@ function CreateItemForm() {
           {...register("status", { required: "Status is required" })}
         />
       </FormField>
-      <Button>Create</Button>
+      <Button>Add</Button>
     </form>
   );
 }
 
-export default CreateItemForm;
+export default AddItemForm;

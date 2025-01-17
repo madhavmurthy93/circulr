@@ -32,7 +32,7 @@ function ProductCard({ product }: ProductCardProps) {
       className="flex flex-row items-start justify-between gap-4 border-b py-4 last:border-none md:flex-col md:justify-start md:border-none"
     >
       <div className="w-2/5 md:w-full">
-        <Link href={`/products/${id}`}>
+        <Link href={`/items/${id}`}>
           <img
             src={`https://picsum.photos/300/300?random=${id}`}
             alt=""
@@ -41,7 +41,7 @@ function ProductCard({ product }: ProductCardProps) {
         </Link>
       </div>
       <div className="flex w-3/5 flex-col gap-2 md:w-full">
-        <Link href={`/products/${id}`}>
+        <Link href={`/items/${id}`}>
           <h2 className="text-base font-semibold text-gray-900 md:text-lg">
             {productName}
           </h2>

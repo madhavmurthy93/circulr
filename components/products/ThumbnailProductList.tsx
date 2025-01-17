@@ -1,6 +1,6 @@
 "use client";
 
-import { capitalizeFirstLetters } from "@/utils/categories";
+import { capitalizeFirstLetters } from "@/utils/common";
 import { faker } from "@faker-js/faker";
 import Link from "next/link";
 import { useRef } from "react";

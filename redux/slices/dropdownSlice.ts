@@ -1,4 +1,4 @@
-import { DropdownState } from "@/types";
+import { DropdownState } from "@/types/redux";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: DropdownState = {

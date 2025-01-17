@@ -1,4 +1,4 @@
-import { ModalState } from "@/types";
+import { ModalState } from "@/types/redux";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: ModalState = {

@@ -1,4 +1,4 @@
-import { SidebarState } from "@/types";
+import { SidebarState } from "@/types/redux";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState = {

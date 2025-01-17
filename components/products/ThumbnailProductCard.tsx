@@ -1,6 +1,6 @@
-import Link from 'next/link';
-import { forwardRef } from 'react';
-import { HiOutlineMapPin } from 'react-icons/hi2';
+import Link from "next/link";
+import { forwardRef } from "react";
+import { HiOutlineMapPin } from "react-icons/hi2";
 
 interface ThumbnailProductCardProps {
   product: {
@@ -28,7 +28,7 @@ const ThumbnailProductCard = forwardRef<
       className="h-60 w-40 flex-shrink-0 overflow-hidden rounded-lg md:h-72 md:w-48"
       ref={ref !== null ? ref : null}
     >
-      <Link href={`/products/${id}`}>
+      <Link href={`/items/${id}`}>
         <img
           src={`https://picsum.photos/300/300?random=${id}`}
           alt=""
@@ -49,6 +49,6 @@ const ThumbnailProductCard = forwardRef<
   );
 });
 
-ThumbnailProductCard.displayName = 'ThumbnailProductCard';
+ThumbnailProductCard.displayName = "ThumbnailProductCard";
 
 export default ThumbnailProductCard;

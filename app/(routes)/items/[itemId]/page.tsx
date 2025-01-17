@@ -4,7 +4,7 @@ import { faker } from "@faker-js/faker";
 
 interface Props {
   params: {
-    productId: string;
+    itemId: string;
   };
 }
 export async function generateMetadata({ params }: Props) {
@@ -14,13 +14,13 @@ export async function generateMetadata({ params }: Props) {
 }
 
 export default async function Page({ params }: Props) {
-  const { productId } = await params;
+  const { itemId } = await params;
   const fullName = faker.person.fullName();
   return (
     <>
       <ProductDetail
         product={{
-          id: parseInt(productId),
+          id: parseInt(itemId),
           name: `${faker.commerce.productAdjective()} ${faker.commerce.product()}`,
           description: faker.commerce.productDescription(),
           details: [

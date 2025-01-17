@@ -7,7 +7,7 @@ export default {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  safelist: ["grid-cols-[1fr,2fr,1.5fr,1.5fr]"],
+  safelist: ["grid-cols-[1fr,1.5fr,1.5fr,1.5fr]"],
   theme: {
     extend: {
       colors: {

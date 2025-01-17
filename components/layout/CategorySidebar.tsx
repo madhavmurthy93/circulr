@@ -1,6 +1,6 @@
 import { closeAllSidebars } from "@/redux/slices/sidebarSlice";
 import { AppDispatch } from "@/redux/store";
-import { capitalizeFirstLetters, categories } from "@/utils/categories";
+import { capitalizeFirstLetters, getItemCategoryValues } from "@/utils/common";
 import Link from "next/link";
 import { forwardRef } from "react";
 import { HiOutlineArrowLeft } from "react-icons/hi2";
@@ -15,7 +15,7 @@ const CategorySidebar = forwardRef<HTMLDivElement, { dispatch: AppDispatch }>(
         ref={ref}
       >
         <ul>
-          {categories.map((category) => (
+          {getItemCategoryValues().map((category) => (
             <li key={category}>
               <Link
                 href={`/c/${category}`}

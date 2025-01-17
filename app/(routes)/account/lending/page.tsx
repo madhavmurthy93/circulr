@@ -2,6 +2,8 @@ import AddItem from "@/components/lending/AddItem";
 import ProductRow from "@/components/lending/ProductRow";
 import Filter from "@/components/ui/Filter";
 import Table from "@/components/ui/Table";
+import { ItemStatus } from "@/types/common";
+import { capitalizeFirstLetters } from "@/utils/common";
 import { faker } from "@faker-js/faker";
 
 export const metadata = {
@@ -19,23 +21,30 @@ export default function Page() {
           filterField="status"
           options={[
             { label: "All", value: "all" },
-            { label: "Active", value: "active" },
-            { label: "Inactive", value: "inactive" },
+            {
+              label: capitalizeFirstLetters(ItemStatus.Available),
+              value: ItemStatus.Available,
+            },
+            {
+              label: capitalizeFirstLetters(ItemStatus.Unavailable),
+              value: ItemStatus.Unavailable,
+            },
           ]}
         />
       </div>
       <Table
-        columns="1fr,2fr,1.5fr,1.5fr"
+        columns="1fr,1.5fr,1.5fr,1.5fr"
         header={["", "Name", "Category", "Status"]}
         data={Array.from({ length: 12 }).map((_, index) => ({
           id: index,
           image: `https://picsum.photos/300/300?random=${index}`,
           name: `${faker.commerce.productAdjective()} ${faker.commerce.product()}`,
           category: faker.commerce.department(),
-          status: index % 3 === 0 ? "active" : "inactive",
+          status:
+            index % 3 === 0 ? ItemStatus.Available : ItemStatus.Unavailable,
         }))}
         render={(data: object) => (
-          <ProductRow columns="1fr,2fr,1.5fr,1.5fr" product={data} />
+          <ProductRow columns="1fr,1.5fr,1.5fr,1.5fr" product={data} />
         )}
       />
       <AddItem />

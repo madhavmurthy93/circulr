@@ -7,22 +7,24 @@ import EditMenu from "@/components/lending/EditMenu";
 import StatusSelect from "@/components/lending/StatusSelect";
 import Button from "@/components/ui/Button";
 import ButtonGroup from "@/components/ui/ButtonGroup";
+import { ItemStatus } from "@/types/common";
+import { capitalizeFirstLetters } from "@/utils/common";
 import { faker } from "@faker-js/faker";
 import Link from "next/link";
 import { HiOutlineArrowLeft } from "react-icons/hi2";
 
 export const metadata = {
-  title: "Edit Product",
+  title: "Edit Item",
 };
 
 interface EditPageProps {
   params: {
-    productId: string;
+    itemId: string;
   };
 }
 
 export default async function Page({ params }: EditPageProps) {
-  const { productId } = await params;
+  const { itemId } = await params;
   const productName = `${faker.commerce.productAdjective()} ${faker.commerce.product()}`;
   return (
     <div className="flex flex-col gap-4">
@@ -39,12 +41,14 @@ export default async function Page({ params }: EditPageProps) {
         <div className="text-sm font-semibold">
           <span
             className={`rounded-full px-3 py-1 ${
-              Number(productId) % 3 === 0
+              Number(itemId) % 3 === 0
                 ? "bg-green-100 text-green-700"
                 : "bg-red-100 text-red-700"
             }`}
           >
-            {Number(productId) % 3 === 0 ? "Active" : "Inactive"}
+            {Number(itemId) % 3 === 0
+              ? capitalizeFirstLetters(ItemStatus.Available)
+              : capitalizeFirstLetters(ItemStatus.Unavailable)}
           </span>
         </div>
         <div className="ml-auto flex flex-row items-center">

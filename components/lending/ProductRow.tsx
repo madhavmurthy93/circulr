@@ -1,3 +1,5 @@
+import { ItemStatus } from "@/types/common";
+import { capitalizeFirstLetters } from "@/utils/common";
 import Link from "next/link";
 
 interface ProductRowProps {
@@ -25,15 +27,17 @@ function ProductRow({ columns, product }: ProductRowProps) {
       <div className="truncate text-sm text-gray-700 md:text-base">
         {category}
       </div>
-      <div className="text-xs font-semibold md:text-sm">
+      <div className="truncate text-xs font-semibold md:text-sm">
         <span
           className={`rounded-full px-3 py-1 ${
-            status === "active"
+            status === ItemStatus.Available
               ? "bg-green-100 text-green-700"
               : "bg-red-100 text-red-700"
           }`}
         >
-          {status === "active" ? "Active" : "Inactive"}
+          {status === ItemStatus.Available
+            ? capitalizeFirstLetters(ItemStatus.Available)
+            : capitalizeFirstLetters(ItemStatus.Unavailable)}
         </span>
       </div>
     </Link>

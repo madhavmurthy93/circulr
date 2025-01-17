@@ -2,7 +2,7 @@ import { useOutsideClick } from "@/hooks/useOutsideClick";
 import { useAppSelector } from "@/redux/hooks";
 import { toggleDropdown } from "@/redux/slices/dropdownSlice";
 import { AppDispatch, RootState } from "@/redux/store";
-import { capitalizeFirstLetters, categories } from "@/utils/categories";
+import { capitalizeFirstLetters, getItemCategoryValues } from "@/utils/common";
 import Link from "next/link";
 import { useRef } from "react";
 import { HiChevronDown, HiOutlineSquares2X2 } from "react-icons/hi2";
@@ -32,7 +32,7 @@ function CategoryDropdown({ dispatch }: { dispatch: AppDispatch }) {
       </button>
       <Dropdown name="categoryDropdown">
         <ul>
-          {categories.map((category) => (
+          {getItemCategoryValues().map((category) => (
             <li key={category}>
               <Link
                 href={`/c/${category}`}

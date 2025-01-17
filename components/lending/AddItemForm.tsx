@@ -1,4 +1,4 @@
-import { categories } from "@/utils/categories";
+import { getItemCategoryValues, getItemStatusValues } from "@/utils/common";
 import { useFieldArray, useForm } from "react-hook-form";
 import { HiOutlinePlus } from "react-icons/hi2";
 import FileInput from "../form/FileInput";
@@ -57,8 +57,38 @@ function AddItemForm() {
 
   const { errors } = formState;
 
-  function onSubmit(data) {
-    console.log(data);
+  async function onSubmit(data: FormValues) {
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("description", data.description);
+    formData.append("category", data.category);
+    formData.append("status", data.status);
+    data.itemDetails.forEach((detail) => {
+      formData.append("details[]", detail.value);
+    });
+    data.files.forEach((file) => {
+      if (file.file) {
+        formData.append("files[]", file.file);
+      }
+    });
+
+    try {
+      const response = await fetch("/api/items", {
+        method: "POST",
+        body: formData,
+        headers: {
+          enctype: "multipart/form-data",
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Item could not be added");
+      }
+      console.log("Item added successfully: ", await response.json());
+    } catch (error) {
+      console.error("Error adding item: ", error);
+    }
+
+    reset();
   }
 
   return (
@@ -134,14 +164,14 @@ function AddItemForm() {
       <FormField label="Category">
         <Select
           id="category"
-          options={categories}
+          options={getItemCategoryValues()}
           {...register("category", { required: "Category is required" })}
         />
       </FormField>
       <FormField label="Status">
         <Select
           id="status"
-          options={["active", "inactive"]}
+          options={getItemStatusValues()}
           {...register("status", { required: "Status is required" })}
         />
       </FormField>

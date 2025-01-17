@@ -2,7 +2,7 @@
 
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { toggleSidebar } from "@/redux/slices/sidebarSlice";
-import { SidebarState } from "@/types";
+import { SidebarState } from "@/types/redux";
 import { forwardRef } from "react";
 
 interface SidebarProps {

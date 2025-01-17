@@ -1,4 +1,4 @@
-import { capitalizeFirstLetters } from "@/utils/categories";
+import { capitalizeFirstLetters } from "@/utils/common";
 import { forwardRef } from "react";
 import { HiChevronDown } from "react-icons/hi2";
 

@@ -1,5 +1,5 @@
 import ProductList from "@/components/products/ProductList";
-import { capitalizeFirstLetters } from "@/utils/categories";
+import { capitalizeFirstLetters } from "@/utils/common";
 
 interface Props {
   params: {

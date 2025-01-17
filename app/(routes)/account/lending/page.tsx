@@ -1,16 +1,16 @@
 import AddItem from "@/components/lending/AddItem";
-import ProductRow from "@/components/lending/ProductRow";
+import ItemsTable from "@/components/lending/ItemsTable";
 import Filter from "@/components/ui/Filter";
-import Table from "@/components/ui/Table";
+import { getItems } from "@/services/supabase/items";
 import { ItemStatus } from "@/types/common";
 import { capitalizeFirstLetters } from "@/utils/common";
-import { faker } from "@faker-js/faker";
 
 export const metadata = {
   title: "Lending",
 };
 
-export default function Page() {
+export default async function Page() {
+  const items = await getItems();
   return (
     <div className="relative flex flex-col gap-4">
       <div className="flex flex-row items-center justify-between">
@@ -32,21 +32,7 @@ export default function Page() {
           ]}
         />
       </div>
-      <Table
-        columns="1fr,1.5fr,1.5fr,1.5fr"
-        header={["", "Name", "Category", "Status"]}
-        data={Array.from({ length: 12 }).map((_, index) => ({
-          id: index,
-          image: `https://picsum.photos/300/300?random=${index}`,
-          name: `${faker.commerce.productAdjective()} ${faker.commerce.product()}`,
-          category: faker.commerce.department(),
-          status:
-            index % 3 === 0 ? ItemStatus.Available : ItemStatus.Unavailable,
-        }))}
-        render={(data: object) => (
-          <ProductRow columns="1fr,1.5fr,1.5fr,1.5fr" product={data} />
-        )}
-      />
+      <ItemsTable items={items} />
       <AddItem />
     </div>
   );

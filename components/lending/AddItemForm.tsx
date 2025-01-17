@@ -94,7 +94,7 @@ function AddItemForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="h-112 md:w-128 flex w-64 flex-col gap-4 overflow-y-scroll p-4 sm:w-96"
+      className="h-112 md:w-128 flex w-64 flex-col gap-4 overflow-y-scroll py-4 sm:w-96"
     >
       <FormField label="Name" error={errors?.name?.message?.toString()}>
         <Input

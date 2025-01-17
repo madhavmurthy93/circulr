@@ -1,6 +1,5 @@
 "use client";
 
-import { HiOutlinePlus } from "react-icons/hi2";
 import Button from "../ui/Button";
 import Modal from "../ui/Modal";
 import AddItemForm from "./AddItemForm";
@@ -10,11 +9,7 @@ function AddItem() {
     <div>
       <Modal>
         <Modal.Open opens="addItem">
-          <Button type="sticky">
-            <span className="text-xl">
-              <HiOutlinePlus />
-            </span>
-          </Button>
+          <Button>Add Item</Button>
         </Modal.Open>
         <Modal.Window name="addItem" label="Add Item">
           <AddItemForm />

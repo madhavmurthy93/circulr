@@ -1,4 +1,8 @@
-import { DbItem, Item, ItemCategory, ItemStatus } from "@/types/common";
+import { DbItem, Item } from "@/types/common";
+import {
+  getItemCategoryFromString,
+  getItemStatusFromString,
+} from "@/utils/common";
 import supabase, { supabaseUrl } from "../supabase";
 
 export async function addItem(item: Item, imageFiles: File[]) {
@@ -51,6 +55,15 @@ export async function addItem(item: Item, imageFiles: File[]) {
   return fromDbItem(data);
 }
 
+export async function getItems() {
+  const { data, error } = await supabase.from("items").select();
+  if (error) {
+    console.error(error);
+    throw new Error("Items could not be fetched");
+  }
+  return data.map(fromDbItem);
+}
+
 export const toDbItem = (item: Item): DbItem => ({
   id: item.id,
   created_at: item.createdAt?.toISOString(),
@@ -73,8 +86,8 @@ export const fromDbItem = (dbItem: DbItem): Item => ({
   description: dbItem.description,
   images: dbItem.images,
   details: dbItem.details,
-  category: ItemCategory[dbItem.category as keyof typeof ItemCategory],
-  status: ItemStatus[dbItem.status as keyof typeof ItemStatus],
+  category: getItemCategoryFromString(dbItem.category),
+  status: getItemStatusFromString(dbItem.status),
   avgRating: dbItem.avg_rating,
   lenderId: dbItem.lender_id,
 });

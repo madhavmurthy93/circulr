@@ -27,17 +27,6 @@ function Button({
         {children}
       </button>
     );
-  } else if (type === "sticky") {
-    return (
-      <div className="sticky bottom-4 right-4 flex flex-row justify-end">
-        <button
-          className="mr-4 rounded-full bg-primary-700 p-3 text-white shadow-md hover:bg-primary-600"
-          onClick={onClick}
-        >
-          {children}
-        </button>
-      </div>
-    );
   }
 }
 

@@ -46,7 +46,7 @@ function Row({ children }: { children: React.ReactNode }) {
   const { columns } = context;
   return (
     <div
-      className={`grid grid-cols-[${columns}] items-center gap-2 border-b border-primary-700 p-4 hover:bg-primary-50`}
+      className={`grid grid-cols-[${columns}] items-center gap-2 border-b border-primary-700 p-4`}
     >
       {children}
     </div>

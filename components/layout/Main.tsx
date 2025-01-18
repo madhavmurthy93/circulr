@@ -12,7 +12,7 @@ function Main({
     (state: RootState) => state.sidebar.mainSidebar
   );
   return (
-    <main className="flex flex-1 font-sans">
+    <main className="flex flex-1">
       <div
         className={`mx-auto w-full max-w-7xl px-4 py-12 transition-opacity duration-300 md:px-6 lg:px-8 ${
           isSidebarOpen ? "opacity-25" : "opacity-100"

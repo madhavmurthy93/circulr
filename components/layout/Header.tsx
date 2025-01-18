@@ -16,7 +16,7 @@ function Header() {
   );
 
   return (
-    <header className="sticky top-0 z-50 bg-primary-700 font-sans text-white">
+    <header className="sticky top-0 z-50 bg-primary-700 text-white">
       <div className="mx-auto px-4 sm:px-6 md:px-8">
         <div
           className={`flex h-20 items-center justify-between gap-2 transition-opacity duration-300 md:gap-4 ${

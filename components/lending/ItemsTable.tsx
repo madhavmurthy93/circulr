@@ -6,12 +6,13 @@ import ItemRow from "./ItemRow";
 
 function ItemsTable({ items }: { items: Item[] }) {
   return (
-    <Table columns="1fr,1.5fr,1.5fr,1.5fr">
+    <Table columns="1fr,1.5fr,1.5fr,1.5fr,0.5fr">
       <Table.Header>
         <div></div>
         <div>Name</div>
         <div>Category</div>
         <div>Status</div>
+        <div></div>
       </Table.Header>
       <Table.Body
         data={items}

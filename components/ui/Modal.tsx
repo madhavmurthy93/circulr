@@ -3,7 +3,13 @@
 import { useOutsideClick } from "@/hooks/useOutsideClick";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { closeModal, openModal } from "@/redux/slices/modalSlice";
-import { cloneElement, createContext, useContext, useRef } from "react";
+import {
+  cloneElement,
+  createContext,
+  isValidElement,
+  useContext,
+  useRef,
+} from "react";
 import { createPortal } from "react-dom";
 import { HiOutlineXMark } from "react-icons/hi2";
 
@@ -75,7 +81,16 @@ function Window({
             <HiOutlineXMark />
           </button>
         </div>
-        <div className="px-8">{children}</div>
+        <div className="px-8">
+          {isValidElement(children) &&
+            cloneElement(
+              children as React.ReactElement<{ onCloseModal: () => void }>,
+              {
+                onCloseModal: close,
+                ...(typeof children.props === "object" ? children.props : {}),
+              }
+            )}
+        </div>
       </div>
     </div>,
     document.body

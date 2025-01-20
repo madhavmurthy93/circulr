@@ -37,7 +37,7 @@ export type Item = {
   details: string[];
   category: ItemCategory;
   status: ItemStatus;
-  avgRating: number;
+  avgRating?: number;
   lenderId?: number;
 };
 
@@ -51,6 +51,6 @@ export type DbItem = {
   details: string[];
   category: string;
   status: string;
-  avg_rating: number;
+  avg_rating?: number;
   lender_id?: number;
 };

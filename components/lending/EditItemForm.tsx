@@ -1,9 +1,8 @@
-"use client";
-
+import { Item } from "@/types/common";
 import { getItemCategoryValues, getItemStatusValues } from "@/utils/common";
 import { useFieldArray, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import { HiOutlinePlus } from "react-icons/hi2";
+import { HiOutlinePlus, HiOutlineXMark } from "react-icons/hi2";
 import FileInput from "../form/FileInput";
 import FormField from "../form/FormField";
 import Input from "../form/Input";
@@ -13,15 +12,23 @@ import TextArea from "../form/TextArea";
 import Button from "../ui/Button";
 
 type FormValues = {
+  id: number;
   name: string;
   description: string;
   itemDetails: { value: string }[];
-  files: { file: File | null }[];
+  existingImages: { url: string }[];
+  newImages: { file: File | null }[];
   category: string;
   status: string;
 };
 
-function AddItemForm({ onCloseModal }: { onCloseModal?: () => void }) {
+function EditItemForm({
+  item,
+  onCloseModal,
+}: {
+  item: Item;
+  onCloseModal?: () => void;
+}) {
   const {
     register,
     handleSubmit,
@@ -33,10 +40,14 @@ function AddItemForm({ onCloseModal }: { onCloseModal?: () => void }) {
     formState,
   } = useForm<FormValues>({
     defaultValues: {
-      name: "",
-      description: "",
-      itemDetails: [],
-      files: [],
+      id: item.id,
+      name: item.name,
+      description: item.description,
+      itemDetails: item.details.map((detail) => ({ value: detail })),
+      existingImages: item.images.map((url) => ({ url })),
+      newImages: [],
+      category: item.category,
+      status: item.status,
     },
   });
 
@@ -50,34 +61,51 @@ function AddItemForm({ onCloseModal }: { onCloseModal?: () => void }) {
   });
 
   const {
-    fields: fileFields,
-    append: appendFile,
-    remove: removeFile,
+    fields: exisingImageFields,
+    append: appendExistingImage,
+    remove: removeExistingImage,
   } = useFieldArray({
     control,
-    name: "files",
+    name: "existingImages",
+  });
+
+  const {
+    fields: newImageFields,
+    append: appendNewImage,
+    remove: removeNewImage,
+  } = useFieldArray({
+    control,
+    name: "newImages",
   });
 
   const { errors } = formState;
 
   async function onSubmit(data: FormValues) {
+    console.log(data);
     const formData = new FormData();
+    formData.append("id", data.id.toString());
     formData.append("name", data.name);
     formData.append("description", data.description);
     formData.append("category", data.category);
     formData.append("status", data.status);
+
     data.itemDetails.forEach((detail) => {
       formData.append("details[]", detail.value);
     });
-    data.files.forEach((file) => {
-      if (file.file) {
-        formData.append("files[]", file.file);
+    item.images
+      .filter((image) => !data.existingImages.some((i) => i.url === image))
+      .forEach((image) => {
+        formData.append("deletedImages[]", image);
+      });
+    data.newImages.forEach((image) => {
+      if (image.file) {
+        formData.append("newImages[]", image.file);
       }
     });
 
     try {
       const response = await fetch("/api/items", {
-        method: "POST",
+        method: "PUT",
         body: formData,
         headers: {
           enctype: "multipart/form-data",
@@ -87,13 +115,13 @@ function AddItemForm({ onCloseModal }: { onCloseModal?: () => void }) {
         const error = await response.json();
         throw new Error(`${error.error}`);
       }
-      console.log("Item added successfully: ", await response.json());
-      toast.success("Item added successfully");
+      console.log("Item updated successfully: ", await response.json());
+      toast.success("Item updated successfully");
       reset();
       onCloseModal?.();
     } catch (error) {
-      console.error("Error adding item: ", error);
-      toast.error(`Item could not be added ${error}`);
+      console.error("Error updating item: ", error);
+      toast.error(`Item could not be updated ${error}`);
     }
   }
 
@@ -120,14 +148,32 @@ function AddItemForm({ onCloseModal }: { onCloseModal?: () => void }) {
       </FormField>
       <FormField label="Media">
         <div className="flex flex-wrap gap-2">
-          {fileFields.map((_: any, index: number) => (
+          {exisingImageFields.map((_: any, index: number) => (
+            <div
+              key={index}
+              className="relative flex h-24 w-24 items-center justify-center overflow-hidden rounded-md border border-dashed border-gray-300"
+            >
+              <img
+                src={getValues(`existingImages.${index}.url` as const)}
+                alt=""
+                className="h-24 w-24 rounded-md object-cover"
+              />
+              <span
+                className="absolute inset-y-0 right-0 cursor-pointer pr-2 pt-2"
+                onClick={() => removeExistingImage(index)}
+              >
+                <HiOutlineXMark />
+              </span>
+            </div>
+          ))}
+          {newImageFields.map((_: any, index: number) => (
             <FileInput
               key={index}
               id={`files-${index}`}
               onChange={(file: File | null) =>
-                setValue(`files.${index}.file`, file)
+                setValue(`newImages.${index}.file`, file)
               }
-              onRemove={() => removeFile(index)}
+              onRemove={() => removeNewImage(index)}
             />
           ))}
           <button
@@ -135,7 +181,7 @@ function AddItemForm({ onCloseModal }: { onCloseModal?: () => void }) {
             className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-md border border-dashed border-gray-300 text-primary-700 hover:text-primary-600"
             onClick={(e) => {
               e.preventDefault();
-              appendFile({ file: null });
+              appendNewImage({ file: null });
             }}
           >
             <span className="text-2xl">
@@ -181,9 +227,9 @@ function AddItemForm({ onCloseModal }: { onCloseModal?: () => void }) {
           {...register("status", { required: "Status is required" })}
         />
       </FormField>
-      <Button>Add</Button>
+      <Button>Edit</Button>
     </form>
   );
 }
 
-export default AddItemForm;
+export default EditItemForm;

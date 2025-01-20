@@ -19,6 +19,7 @@ const ListInput = forwardRef<HTMLInputElement, ListInputProps>(
           className="w-full rounded-md border border-gray-300 py-2 pl-3 pr-7 text-sm shadow-sm focus:border-primary-700 focus:outline-none focus:ring-primary-700 md:text-base"
         />
         <button
+          type="button"
           className="absolute inset-y-0 right-0 flex items-center pr-3"
           onClick={onRemove}
         >

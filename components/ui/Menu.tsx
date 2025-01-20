@@ -44,7 +44,7 @@ function Toggle({ id, children }: { id: number; children: React.ReactNode }) {
       .getBoundingClientRect();
     setPosition({
       x: window.innerWidth - rect.width - rect.x,
-      y: rect.y + rect.height,
+      y: rect.y + rect.height + 8,
     });
     if (openId === id) {
       close();
@@ -56,7 +56,7 @@ function Toggle({ id, children }: { id: number; children: React.ReactNode }) {
   return (
     <button
       onClick={handleClick}
-      className="rounded-md p-3 hover:bg-primary-50"
+      className="rounded-md p-3 hover:bg-primary-50 focus:outline-none focus:ring-1 focus:ring-primary-700"
     >
       {children}
     </button>

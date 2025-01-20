@@ -13,6 +13,7 @@ export async function addItem(item: Item, imageFiles: File[]) {
   delete dbItem.updated_at;
   // Set default values
   dbItem.lender_id = 1;
+  dbItem.avg_rating = 0;
 
   const imageNames: string[] = [];
   const imagePaths: string[] = [];
@@ -56,12 +57,88 @@ export async function addItem(item: Item, imageFiles: File[]) {
 }
 
 export async function getItems() {
-  const { data, error } = await supabase.from("items").select();
+  const { data, error } = await supabase
+    .from("items")
+    .select()
+    .order("id", { ascending: true });
   if (error) {
     console.error(error);
     throw new Error("Items could not be fetched");
   }
   return data.map(fromDbItem);
+}
+
+export async function updateItem(
+  item: Item,
+  deletedImages: string[],
+  imageFiles: File[]
+) {
+  const oldItem = await supabase
+    .from("items")
+    .select()
+    .eq("id", item.id)
+    .single();
+
+  const newItem = toDbItem(item);
+
+  const imageNames: string[] = [];
+  const imagePaths: string[] = [];
+
+  if (imageFiles.length > 0) {
+    imageFiles.map(async (image) => {
+      const imageName = `${Math.random()}-${image.name}`.replaceAll("/", "");
+      const imagePath = `${supabaseUrl}/storage/v1/object/public/item_images/${imageName}`;
+      imageNames.push(imageName);
+      imagePaths.push(imagePath);
+    });
+  }
+  newItem.images = oldItem.data.images
+    .filter((image: string) => !deletedImages.includes(image))
+    .concat(imagePaths);
+
+  const { data, error } = await supabase
+    .from("items")
+    .update(newItem)
+    .eq("id", item.id)
+    .select()
+    .single();
+
+  if (error) {
+    console.error(error);
+    throw new Error("Item could not be updated");
+  }
+
+  if (deletedImages.length > 0) {
+    deletedImages.map(async (image) => {
+      const { error } = await supabase.storage
+        .from("item_images")
+        .remove([image]);
+      if (error) {
+        await supabase.from("items").update(oldItem.data).eq("id", item.id);
+        console.error(error);
+        throw new Error(
+          "Item images could not be deleted and the item was not updated"
+        );
+      }
+    });
+  }
+
+  if (imageFiles.length > 0) {
+    imageFiles.map(async (image, index) => {
+      const { error } = await supabase.storage
+        .from("item_images")
+        .upload(imageNames[index], image);
+      if (error) {
+        await supabase.from("items").update(oldItem.data).eq("id", item.id);
+        console.error(error);
+        throw new Error(
+          "Item images could not be uploaded and the item was not updated"
+        );
+      }
+    });
+  }
+  console.log("Item updated successfully: ", data);
+  return fromDbItem(data);
 }
 
 export const toDbItem = (item: Item): DbItem => ({

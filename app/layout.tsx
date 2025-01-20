@@ -4,6 +4,7 @@ import ReduxProvider from "@/contexts/ReduxProvider";
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -37,6 +38,21 @@ export default function RootLayout({
         <ReduxProvider>
           <Header />
           <Main>{children}</Main>
+          <Toaster
+            position="top-center"
+            gutter={12}
+            containerStyle={{ margin: "8px" }}
+            toastOptions={{
+              success: {
+                duration: 3000,
+              },
+              error: {
+                duration: 5000,
+              },
+              className:
+                "text-gray-700 bg-white text-sm md:text-base p-4 shadow-md rounded-md max-w-md",
+            }}
+          />
         </ReduxProvider>
       </body>
     </html>

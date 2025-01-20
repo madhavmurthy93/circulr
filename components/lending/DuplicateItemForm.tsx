@@ -1,4 +1,6 @@
+"use client";
 import { Item } from "@/types/common";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import Button from "../ui/Button";
 import ButtonGroup from "../ui/ButtonGroup";
@@ -10,6 +12,7 @@ function DuplicateItemForm({
   item: Item;
   onCloseModal?: () => void;
 }) {
+  const router = useRouter();
   async function handleDuplicate() {
     const formData = new FormData();
     formData.append("name", item.name);
@@ -49,6 +52,7 @@ function DuplicateItemForm({
       }
       console.log("Item duplicated successfully: ", await response.json());
       toast.success("Item duplicated successfully");
+      router.refresh();
       onCloseModal?.();
     } catch (error) {
       console.error("Error duplicating item: ", error);

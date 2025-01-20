@@ -1,5 +1,8 @@
+"use client";
+
 import { Item } from "@/types/common";
 import { getItemCategoryValues, getItemStatusValues } from "@/utils/common";
+import { useRouter } from "next/navigation";
 import { useFieldArray, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { HiOutlinePlus, HiOutlineXMark } from "react-icons/hi2";
@@ -29,6 +32,7 @@ function EditItemForm({
   item: Item;
   onCloseModal?: () => void;
 }) {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -118,6 +122,7 @@ function EditItemForm({
       console.log("Item updated successfully: ", await response.json());
       toast.success("Item updated successfully");
       reset();
+      router.refresh();
       onCloseModal?.();
     } catch (error) {
       console.error("Error updating item: ", error);

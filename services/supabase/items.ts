@@ -60,7 +60,7 @@ export async function getItems() {
   const { data, error } = await supabase
     .from("items")
     .select()
-    .order("id", { ascending: true });
+    .order("created_at", { ascending: false });
   if (error) {
     console.error(error);
     throw new Error("Items could not be fetched");

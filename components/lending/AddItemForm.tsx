@@ -1,6 +1,7 @@
 "use client";
 
 import { getItemCategoryValues, getItemStatusValues } from "@/utils/common";
+import { useRouter } from "next/navigation";
 import { useFieldArray, useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { HiOutlinePlus } from "react-icons/hi2";
@@ -22,6 +23,7 @@ type FormValues = {
 };
 
 function AddItemForm({ onCloseModal }: { onCloseModal?: () => void }) {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -90,6 +92,7 @@ function AddItemForm({ onCloseModal }: { onCloseModal?: () => void }) {
       console.log("Item added successfully: ", await response.json());
       toast.success("Item added successfully");
       reset();
+      router.refresh();
       onCloseModal?.();
     } catch (error) {
       console.error("Error adding item: ", error);

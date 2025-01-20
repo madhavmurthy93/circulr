@@ -1,4 +1,7 @@
+"use client";
+
 import { Item } from "@/types/common";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import Button from "../ui/Button";
 import ButtonGroup from "../ui/ButtonGroup";
@@ -10,6 +13,7 @@ function DeleteItemForm({
   item: Item;
   onCloseModal?: () => void;
 }) {
+  const router = useRouter();
   async function handleDelete() {
     try {
       const response = await fetch(`/api/items/${item.id}`, {
@@ -21,6 +25,7 @@ function DeleteItemForm({
       }
       console.log("Item deleted successfully: ", await response.json());
       toast.success("Item deleted successfully");
+      router.refresh();
       onCloseModal?.();
     } catch (error) {
       console.error("Error deleting item: ", error);

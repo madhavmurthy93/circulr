@@ -141,6 +141,15 @@ export async function updateItem(
   return fromDbItem(data);
 }
 
+export async function deleteItem(id: number) {
+  const { error } = await supabase.from("items").delete().eq("id", id);
+  if (error) {
+    console.error(error);
+    throw new Error("Item could not be deleted");
+  }
+  console.log("Item deleted successfully: ", id);
+}
+
 export const toDbItem = (item: Item): DbItem => ({
   id: item.id,
   created_at: item.createdAt?.toISOString(),

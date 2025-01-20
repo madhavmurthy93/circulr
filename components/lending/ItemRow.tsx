@@ -4,6 +4,7 @@ import { HiEllipsisVertical } from "react-icons/hi2";
 import Menu from "../ui/Menu";
 import Modal from "../ui/Modal";
 import Table from "../ui/Table";
+import DeleteItemForm from "./DeleteItemForm";
 import EditItemForm from "./EditItemForm";
 
 interface ItemRowProps {
@@ -56,13 +57,21 @@ function ItemRow({ item }: ItemRowProps) {
                   Edit
                 </Menu.Button>
               </Modal.Open>
-              <Menu.Button onClick={() => console.log("Delete")}>
-                Delete
-              </Menu.Button>
+              <Modal.Open opens={`deleteItem-${id}`}>
+                <Menu.Button onClick={() => console.log("Delete")}>
+                  Delete
+                </Menu.Button>
+              </Modal.Open>
             </Menu.List>
           </Menu>
           <Modal.Window name={`editItem-${id}`} label={`Edit Item: ${name}`}>
             <EditItemForm item={item} />
+          </Modal.Window>
+          <Modal.Window
+            name={`deleteItem-${id}`}
+            label={`Delete Item: ${name}`}
+          >
+            <DeleteItemForm item={item} />
           </Modal.Window>
         </Modal>
       </div>

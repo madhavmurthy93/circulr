@@ -5,6 +5,7 @@ import Menu from "../ui/Menu";
 import Modal from "../ui/Modal";
 import Table from "../ui/Table";
 import DeleteItemForm from "./DeleteItemForm";
+import DuplicateItemForm from "./DuplicateItemForm";
 import EditItemForm from "./EditItemForm";
 
 interface ItemRowProps {
@@ -49,9 +50,11 @@ function ItemRow({ item }: ItemRowProps) {
               </span>
             </Menu.Toggle>
             <Menu.List id={id}>
-              <Menu.Button onClick={() => console.log("Duplicate")}>
-                Duplicate
-              </Menu.Button>
+              <Modal.Open opens={`duplicateItem-${id}`}>
+                <Menu.Button onClick={() => console.log("Duplicate")}>
+                  Duplicate
+                </Menu.Button>
+              </Modal.Open>
               <Modal.Open opens={`editItem-${id}`}>
                 <Menu.Button onClick={() => console.log("Edit")}>
                   Edit
@@ -64,6 +67,12 @@ function ItemRow({ item }: ItemRowProps) {
               </Modal.Open>
             </Menu.List>
           </Menu>
+          <Modal.Window
+            name={`duplicateItem-${id}`}
+            label={`Duplicate Item: ${name}`}
+          >
+            <DuplicateItemForm item={item} />
+          </Modal.Window>
           <Modal.Window name={`editItem-${id}`} label={`Edit Item: ${name}`}>
             <EditItemForm item={item} />
           </Modal.Window>

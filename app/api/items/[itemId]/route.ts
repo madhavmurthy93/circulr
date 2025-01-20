@@ -4,7 +4,7 @@ export async function DELETE(
   req: Request,
   { params }: { params: { itemId: string } }
 ) {
-  const { itemId } = params;
+  const { itemId } = await params;
   try {
     await deleteItem(Number(itemId));
     return Response.json(

@@ -31,7 +31,7 @@ function CategoryDropdown({ dispatch }: { dispatch: AppDispatch }) {
         <HiChevronDown />
       </button>
       <Dropdown name="categoryDropdown">
-        <ul>
+        <ul className="h-96 overflow-y-scroll">
           {getItemCategoryValues().map((category) => (
             <li key={category}>
               <Link

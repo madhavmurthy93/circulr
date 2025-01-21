@@ -32,7 +32,6 @@ function LoginForm() {
         },
       });
 
-      console.log(response);
       if (!response.ok) {
         const error = await response.json();
         throw new Error(`${error.error}`);

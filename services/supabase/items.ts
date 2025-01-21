@@ -13,7 +13,11 @@ export async function addItem(item: Item, imageFiles: File[]) {
   delete dbItem.created_at;
   delete dbItem.updated_at;
   // Set default values
-  dbItem.lender_id = 1;
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user) throw new Error("User not found");
+  dbItem.lender_id = user?.id;
   dbItem.avg_rating = 0;
 
   const imageNames: string[] = [];

@@ -22,6 +22,21 @@ export async function signup({
     console.error(error);
     throw error;
   }
+  const { user } = data;
+
+  if (user) {
+    const { error: insertError } = await supabase
+      .from("users")
+      .insert([
+        { id: user.id, email: user.email, name: user.user_metadata.name },
+      ]);
+
+    if (insertError) {
+      console.error(insertError);
+      throw insertError;
+    }
+  }
+
   return data;
 }
 
@@ -42,5 +57,6 @@ export async function login({
     console.error(error);
     throw error;
   }
+
   return data;
 }

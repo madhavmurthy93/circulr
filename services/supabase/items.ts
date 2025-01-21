@@ -74,18 +74,22 @@ export async function getItems() {
   return data.map(fromDbItem);
 }
 
-export async function getItemsByCurrentUser() {
+export async function getItemsByCurrentUser(
+  filters: { key: string; value: string }[]
+) {
   const supabase = await createClient();
   const {
     data: { user },
   } = await supabase.auth.getUser();
   if (!user) throw new Error("User not found");
 
-  const { data, error } = await supabase
-    .from("items")
-    .select()
-    .eq("lender_id", user.id)
-    .order("created_at", { ascending: false });
+  let query = supabase.from("items").select().eq("lender_id", user.id);
+  filters.forEach((filter) => {
+    query = query.eq(filter.key, filter.value);
+  });
+  query = query.order("created_at", { ascending: false });
+  const { data, error } = await query;
+
   if (error) {
     console.error(error);
     throw new Error("Items could not be fetched");

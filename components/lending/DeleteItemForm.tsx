@@ -34,7 +34,7 @@ function DeleteItemForm({
   }
 
   return (
-    <div className="md:w-128 flex w-64 flex-col gap-4 py-4 sm:w-96">
+    <div className="md:w-128 flex w-64 flex-col gap-4 pt-4 sm:w-96">
       <p>Are you sure you want to delete this item?</p>
       <ButtonGroup>
         <Button onClick={onCloseModal} type="secondary">

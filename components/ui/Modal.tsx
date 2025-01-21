@@ -72,16 +72,16 @@ function Window({
   return createPortal(
     <div className="fixed left-0 top-0 z-50 h-screen w-full bg-black bg-opacity-50 transition-opacity duration-300 ease-in-out">
       <div
-        className="fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 transform rounded-md bg-white font-sans shadow-md transition-transform duration-300 ease-in-out"
+        className="fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 transform rounded-md bg-white p-8 font-sans shadow-md transition-transform duration-300 ease-in-out"
         ref={ref}
       >
-        <div className="flex justify-between px-8 pt-8">
+        <div className="flex justify-between">
           <h2 className="text-lg font-semibold">{label}</h2>
           <button onClick={close} className="text-2xl">
             <HiOutlineXMark />
           </button>
         </div>
-        <div className="px-8">
+        <div>
           {isValidElement(children) &&
             cloneElement(
               children as React.ReactElement<{ onCloseModal: () => void }>,

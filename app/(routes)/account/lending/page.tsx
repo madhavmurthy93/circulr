@@ -1,7 +1,7 @@
 import AddItem from "@/components/lending/AddItem";
 import ItemsTable from "@/components/lending/ItemsTable";
 import Filter from "@/components/ui/Filter";
-import { getItems } from "@/services/supabase/items";
+import { getItemsByCurrentUser } from "@/services/supabase/items";
 import { ItemStatus } from "@/types/common";
 import { capitalizeFirstLetters } from "@/utils/common";
 
@@ -10,7 +10,7 @@ export const metadata = {
 };
 
 export default async function Page() {
-  const items = await getItems();
+  const items = await getItemsByCurrentUser();
   return (
     <div className="relative flex flex-col gap-4">
       <div className="flex flex-row items-center justify-between">

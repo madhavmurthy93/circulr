@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.5.0",
+    "@supabase/ssr": "^0.5.2",
     "@supabase/supabase-js": "^2.47.14",
     "@types/formidable": "^3.4.5",
     "formidable": "^3.5.2",

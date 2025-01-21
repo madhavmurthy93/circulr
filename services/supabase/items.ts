@@ -3,9 +3,10 @@ import {
   getItemCategoryFromString,
   getItemStatusFromString,
 } from "@/utils/common";
-import supabase, { supabaseUrl } from "../supabase";
+import { createClient, supabaseUrl } from "./server";
 
 export async function addItem(item: Item, imageFiles: File[]) {
+  const supabase = await createClient();
   const dbItem = toDbItem(item);
   // Remove auto-generated fields
   delete dbItem.id;
@@ -57,6 +58,7 @@ export async function addItem(item: Item, imageFiles: File[]) {
 }
 
 export async function getItems() {
+  const supabase = await createClient();
   const { data, error } = await supabase
     .from("items")
     .select()
@@ -73,6 +75,7 @@ export async function updateItem(
   deletedImages: string[],
   imageFiles: File[]
 ) {
+  const supabase = await createClient();
   const oldItem = await supabase
     .from("items")
     .select()
@@ -142,6 +145,7 @@ export async function updateItem(
 }
 
 export async function deleteItem(id: number) {
+  const supabase = await createClient();
   const { error } = await supabase.from("items").delete().eq("id", id);
   if (error) {
     console.error(error);

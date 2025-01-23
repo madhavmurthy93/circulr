@@ -1,3 +1,4 @@
+import { EmailOtpType } from "@supabase/supabase-js";
 import createClient from "./server";
 
 export async function signup({
@@ -40,6 +41,25 @@ export async function signup({
   return data;
 }
 
+export async function confirmEmail({
+  token_hash,
+  type,
+}: {
+  token_hash: string;
+  type: EmailOtpType;
+}) {
+  const supabase = await createClient();
+  const { error } = await supabase.auth.verifyOtp({
+    type,
+    token_hash,
+  });
+
+  if (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
 export async function login({
   email,
   password,
@@ -59,4 +79,28 @@ export async function login({
   }
 
   return data;
+}
+
+export async function logout() {
+  const supabase = await createClient();
+  const { error } = await supabase.auth.signOut();
+  if (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+export async function getCurrentUser() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser();
+
+  if (error) {
+    console.error(error);
+    throw error;
+  }
+
+  return user;
 }

@@ -40,7 +40,7 @@ function SignUpForm() {
       console.log("Signed up successfully: ", await response.json());
       toast.success("Signed up successfully! Redirecting...");
       setTimeout(() => {
-        router.push("/");
+        router.push("/auth/login");
       }, 2000);
     } catch (error) {
       console.error("Error signing up: ", error);

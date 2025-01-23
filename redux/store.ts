@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import dropdownReducer from "./slices/dropdownSlice";
 import modalReducer from "./slices/modalSlice";
+import sessionReducer from "./slices/sessionSlice";
 import sidebarReducer from "./slices/sidebarSlice";
 
 const store = configureStore({
@@ -8,6 +9,7 @@ const store = configureStore({
     sidebar: sidebarReducer,
     dropdown: dropdownReducer,
     modal: modalReducer,
+    session: sessionReducer,
   },
 });
 

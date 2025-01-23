@@ -1,5 +1,8 @@
 "use client";
 
+import { useAppDispatch } from "@/redux/hooks";
+import { setSession } from "@/redux/slices/sessionSlice";
+import createClient from "@/services/supabase/client";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -14,6 +17,7 @@ type FormValues = {
 
 function LoginForm() {
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const { register, reset, formState, getValues, handleSubmit } =
     useForm<FormValues>();
   const { errors } = formState;
@@ -38,6 +42,11 @@ function LoginForm() {
       }
       console.log("Logged in successfully: ", await response.json());
       toast.success("Logged in successfully! Redirecting...");
+      const supabase = createClient();
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      dispatch(setSession(session));
       setTimeout(() => {
         router.push("/");
       }, 2000);

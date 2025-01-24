@@ -37,6 +37,6 @@ const ThumbnailItemCard = forwardRef<HTMLDivElement, ThumbnailItemCardProps>(
   }
 );
 
-ThumbnailItemCard.displayName = "ThumbnailProductCard";
+ThumbnailItemCard.displayName = "ThumbnailItemCard";
 
 export default ThumbnailItemCard;

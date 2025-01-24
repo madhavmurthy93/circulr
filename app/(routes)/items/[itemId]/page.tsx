@@ -1,6 +1,6 @@
-import ProductDetail from "@/components/items/ProductDetail";
+import ItemDetail from "@/components/items/ItemDetail";
 import ThumbnailItemList from "@/components/items/ThumbnailItemList";
-import { faker } from "@faker-js/faker";
+import { getItemById, getItems } from "@/services/supabase/items";
 
 interface Props {
   params: {
@@ -8,40 +8,23 @@ interface Props {
   };
 }
 export async function generateMetadata({ params }: Props) {
+  const { itemId } = await params;
+  const item = await getItemById(parseInt(itemId));
   return {
-    title: `Borrow ${faker.commerce.productAdjective()} ${faker.commerce.product()}`,
+    title: `Borrow ${item.name}`,
   };
 }
 
 export default async function Page({ params }: Props) {
   const { itemId } = await params;
-  const fullName = faker.person.fullName();
+  const [item, items] = await Promise.all([
+    getItemById(parseInt(itemId)),
+    getItems(),
+  ]);
   return (
     <>
-      <ProductDetail
-        product={{
-          id: parseInt(itemId),
-          name: `${faker.commerce.productAdjective()} ${faker.commerce.product()}`,
-          description: faker.commerce.productDescription(),
-          details: [
-            faker.commerce.productDescription(),
-            faker.commerce.productDescription(),
-            faker.commerce.productDescription(),
-            faker.commerce.productDescription(),
-            faker.commerce.productDescription(),
-          ],
-          rating: {
-            value: Math.floor(Math.random() * 5) + 1,
-            numRatings: Math.floor(Math.random() * 100) + 1,
-          },
-          lender: {
-            name: fullName,
-            city: faker.location.city(),
-          },
-        }}
-      />
-      <ThumbnailItemList category={`More from ${fullName}`} />
-      <ThumbnailItemList category="electronics" />
+      <ItemDetail item={item} />
+      <ThumbnailItemList category={item.category} items={items} />
     </>
   );
 }

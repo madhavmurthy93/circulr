@@ -88,6 +88,31 @@ export async function getItems() {
   return items;
 }
 
+export async function getItemById(id: number) {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("items")
+    .select()
+    .eq("id", id)
+    .single();
+
+  if (error) {
+    console.error(error);
+    throw new Error("Item could not be fetched");
+  }
+
+  const { data: users, error: usersError } = await supabase
+    .from("users")
+    .select();
+  if (usersError) {
+    console.error(usersError);
+    throw new Error("Users could not be fetched");
+  }
+  const item = fromDbItem(data);
+  const user = users.find((user) => user.id === item.lenderId);
+  return { ...item, lenderName: user?.name, lenderCity: user?.city };
+}
+
 export async function getItemsByCurrentUser(
   filters: { key: string; value: string }[]
 ) {

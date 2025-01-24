@@ -1,5 +1,5 @@
-import ProductDetail from "@/components/products/ProductDetail";
-import ThumbnailProductList from "@/components/products/ThumbnailProductList";
+import ProductDetail from "@/components/items/ProductDetail";
+import ThumbnailItemList from "@/components/items/ThumbnailItemList";
 import { faker } from "@faker-js/faker";
 
 interface Props {
@@ -40,8 +40,8 @@ export default async function Page({ params }: Props) {
           },
         }}
       />
-      <ThumbnailProductList category={`More from ${fullName}`} />
-      <ThumbnailProductList category="electronics" />
+      <ThumbnailItemList category={`More from ${fullName}`} />
+      <ThumbnailItemList category="electronics" />
     </>
   );
 }

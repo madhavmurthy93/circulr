@@ -39,6 +39,8 @@ export type Item = {
   status: ItemStatus;
   avgRating?: number;
   lenderId?: string;
+  lenderName?: string;
+  lenderCity?: string;
 };
 
 export type DbItem = {

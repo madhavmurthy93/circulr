@@ -1,4 +1,4 @@
-import ProductList from "@/components/products/ProductList";
+import ProductList from "@/components/items/ProductList";
 import { capitalizeFirstLetters } from "@/utils/common";
 
 interface Props {

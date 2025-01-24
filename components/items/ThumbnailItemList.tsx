@@ -1,17 +1,18 @@
 "use client";
 
+import { Item } from "@/types/common";
 import { capitalizeFirstLetters } from "@/utils/common";
-import { faker } from "@faker-js/faker";
 import Link from "next/link";
 import { useRef } from "react";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi2";
-import ThumbnailProductCard from "./ThumbnailProductCard";
+import ThumbnailItemCard from "./ThumbnailItemCard";
 
-interface ThumbnailProductListProps {
+interface ThumbnailItemListProps {
   category: string;
+  items: Item[];
 }
 
-function ThumbnailProductList({ category }: ThumbnailProductListProps) {
+function ThumbnailItemList({ category, items }: ThumbnailItemListProps) {
   const scrollRef = useRef<HTMLDivElement | null>(null);
   const itemRef = useRef<HTMLDivElement | null>(null);
 
@@ -37,6 +38,8 @@ function ThumbnailProductList({ category }: ThumbnailProductListProps) {
     }
   };
 
+  if (!items.some((item) => item.category === category)) return null;
+
   return (
     <div className="w-full py-4">
       <div className="mb-4 flex w-full flex-row items-center justify-between gap-2">
@@ -60,21 +63,15 @@ function ThumbnailProductList({ category }: ThumbnailProductListProps) {
         </button>
         <div className="w-full overflow-x-auto scrollbar-none" ref={scrollRef}>
           <div className="flex flex-row gap-4">
-            {Array.from({ length: 10 }, (_, index) => (
-              <ThumbnailProductCard
-                key={index}
-                ref={index === 0 ? itemRef : null}
-                product={{
-                  id: index,
-                  name: `${faker.commerce.productAdjective()} ${faker.commerce.product()}`,
-                  description: faker.commerce.productDescription(),
-                  lender: {
-                    name: faker.person.fullName(),
-                    city: faker.location.city(),
-                  },
-                }}
-              />
-            ))}
+            {items
+              .filter((item) => item.category === category)
+              .map((item, index) => (
+                <ThumbnailItemCard
+                  key={index}
+                  ref={index === 0 ? itemRef : null}
+                  item={item}
+                />
+              ))}
           </div>
         </div>
         <button
@@ -88,4 +85,4 @@ function ThumbnailProductList({ category }: ThumbnailProductListProps) {
   );
 }
 
-export default ThumbnailProductList;
+export default ThumbnailItemList;

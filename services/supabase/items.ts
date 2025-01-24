@@ -67,11 +67,25 @@ export async function getItems() {
     .from("items")
     .select()
     .order("created_at", { ascending: false });
+
   if (error) {
     console.error(error);
     throw new Error("Items could not be fetched");
   }
-  return data.map(fromDbItem);
+
+  const { data: users, error: usersError } = await supabase
+    .from("users")
+    .select();
+  if (usersError) {
+    console.error(usersError);
+    throw new Error("Users could not be fetched");
+  }
+  const items = data.map(fromDbItem).map((item) => {
+    const user = users.find((user) => user.id === item.lenderId);
+    return { ...item, lenderName: user?.name, lenderCity: user?.city };
+  });
+
+  return items;
 }
 
 export async function getItemsByCurrentUser(
